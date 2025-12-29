@@ -66,8 +66,14 @@ function FrameworkNode({ data, selected }: NodeProps<any>) {
                         <Download size={16} />
                     </button>
                     <button
-                        onClick={data.onDelete}
-                        className="p-1.5 rounded-lg hover:bg-red-500/10 text-zinc-500 hover:text-red-500 transition-colors"
+                        onClick={(e) => {
+                            e.stopPropagation(); // Prevent selection when clicking delete
+                            if (window.confirm('Delete this framework?')) {
+                                data.onDelete?.();
+                            }
+                        }}
+                        className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+                        title="Delete Framework"
                     >
                         <X size={16} />
                     </button>

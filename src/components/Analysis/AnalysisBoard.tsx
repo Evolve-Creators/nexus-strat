@@ -317,166 +317,202 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
         });
     };
 
-    return (
-        <div className="w-full h-full flex flex-col relative" ref={reactFlowWrapper}>
-            <ReactFlow
-                nodes={nodes}
-                edges={edges}
-                onNodesChange={onNodesChange}
-                onEdgesChange={onEdgesChange}
-                onConnect={onConnect}
-                onInit={setReactFlowInstance}
-                onDrop={onDrop}
-                onDragOver={onDragOver}
-                nodeTypes={nodeTypes}
-                defaultEdgeOptions={defaultEdgeOptions}
-                fitView
-                className="bg-zinc-950"
-                deleteKeyCode={['Backspace', 'Delete']}
-                connectionMode={ConnectionMode.Loose}
-            >
-                <Background gap={20} color="#3f3f46" variant={BackgroundVariant.Dots} size={1} />
-                <Controls className="bg-zinc-800 border-zinc-800 fill-zinc-400" />
-                <MiniMap
-                    nodeColor={(n: Node) => {
-                        if (n.type === 'frameworkNode') return '#10b981';
-                        if (n.type === 'stickyNote') {
-                            const data = n.data as any;
-                            return data.color || '#fef08a';
-                        }
-                        if (n.type === 'imageNode') return '#3b82f6';
-                        return '#fff';
-                    }}
-                    className="bg-zinc-900 border border-zinc-900 rounded-lg overflow-hidden"
-                    maskColor="rgba(0, 0, 0, 0.7)"
-                />
+    const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
-                <Panel position="top-left" className="m-2 flex flex-col gap-4 max-h-[80vh]">
+    return (
+        <div className="w-full h-full flex overflow-hidden">
+            {/* Framework sidebar */}
+            <div
+                className={`
+                    flex flex-col border-r border-zinc-800 bg-zinc-900 transition-all duration-300 ease-in-out relative
+                    ${isSidebarOpen ? 'w-64 opacity-100' : 'w-0 opacity-0 overflow-hidden'}
+                `}
+            >
+                {/* Sidebar Header */}
+                <div className="p-4 border-b border-zinc-800 flex items-center justify-between min-w-[256px]">
+                    <span className="font-bold text-sm text-zinc-100 uppercase tracking-wider">Analysis Tools</span>
+                </div>
+
+                {/* Back Button */}
+                <div className="p-2 min-w-[256px]">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg shadow-lg border border-zinc-800 transition w-fit"
+                        className="flex items-center gap-2 px-3 py-2 w-full text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800 rounded-lg transition-all"
                     >
-                        <span>← Dashboard</span>
+                        <span>← Back to Dashboard</span>
                     </button>
+                </div>
 
-                    <div className="bg-zinc-900/90 backdrop-blur border border-zinc-800 rounded-xl p-3 shadow-xl flex flex-col gap-2 min-w-[220px] max-h-[60vh] overflow-y-auto custom-scrollbar">
-                        <div className="flex items-center gap-2 text-zinc-500 border-b border-zinc-800 pb-2 mb-1 px-1">
-                            <span className="text-[10px] font-bold uppercase tracking-widest">Framework Library</span>
-                        </div>
-
-                        {/* Helper Component for Groups */}
-                        {(() => {
-                            const FrameworkGroup = ({ title, items, defaultOpen = false }: { title: string, items: Framework[], defaultOpen?: boolean }) => {
-                                const [isOpen, setIsOpen] = useState(defaultOpen);
-                                return (
-                                    <div className="flex flex-col gap-1">
-                                        <button
-                                            onClick={() => setIsOpen(!isOpen)}
-                                            className="flex items-center gap-2 px-2 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 rounded-lg transition-all w-full text-left"
-                                        >
-                                            {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
-                                            <span className="text-xs font-semibold">{title}</span>
-                                            <span className="ml-auto text-[10px] opacity-50 bg-zinc-800 px-1.5 rounded-full">{items.length}</span>
-                                        </button>
-
-                                        {isOpen && (
-                                            <div className="flex flex-col gap-1 pl-2 border-l border-zinc-800 ml-3">
-                                                {items.map(fw => (
-                                                    <div
-                                                        key={fw.id}
-                                                        draggable
-                                                        onDragStart={(e) => {
-                                                            e.dataTransfer.setData('application/reactflow/type', 'frameworkNode');
-                                                            e.dataTransfer.setData('application/reactflow/frameworkId', fw.id);
-                                                            e.dataTransfer.effectAllowed = 'move';
-                                                        }}
-                                                        className="px-3 py-2 bg-zinc-800/40 hover:bg-zinc-800 hover:border-zinc-700 border border-transparent rounded-md cursor-grab active:cursor-grabbing transition group flex items-center justify-between"
-                                                    >
-                                                        <span className="text-xs text-zinc-400 group-hover:text-zinc-200 truncate" title={fw.name}>{fw.name}</span>
-                                                    </div>
-                                                ))}
-                                            </div>
-                                        )}
-                                    </div>
-                                );
-                            };
-
-                            const general = allFrameworks.filter(f => f.category === 'general');
-                            const specific = allFrameworks.filter(f => f.category === 'case-specific');
-
+                {/* Framework List (Accordion) */}
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 min-w-[256px]">
+                    {(() => {
+                        const FrameworkGroup = ({ title, items, defaultOpen = false }: { title: string, items: Framework[], defaultOpen?: boolean }) => {
+                            const [isOpen, setIsOpen] = useState(defaultOpen);
                             return (
-                                <>
-                                    <FrameworkGroup title="General Models" items={general} defaultOpen={true} />
-                                    <FrameworkGroup title="Case Specific" items={specific} defaultOpen={false} />
-                                </>
+                                <div className="flex flex-col gap-1 mb-2">
+                                    <button
+                                        onClick={() => setIsOpen(!isOpen)}
+                                        className="flex items-center gap-2 px-2 py-1.5 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-800/50 rounded-lg transition-all w-full text-left group"
+                                    >
+                                        {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                                        <span className="text-xs font-semibold group-hover:text-emerald-400 transition-colors">{title}</span>
+                                        <span className="ml-auto text-[10px] opacity-50 bg-zinc-800 px-1.5 rounded-full min-w-[20px] text-center">{items.length}</span>
+                                    </button>
+
+                                    {isOpen && (
+                                        <div className="flex flex-col gap-1 pl-2 border-l border-zinc-800 ml-3">
+                                            {items.map(fw => (
+                                                <div
+                                                    key={fw.id}
+                                                    draggable
+                                                    onDragStart={(e) => {
+                                                        e.dataTransfer.setData('application/reactflow/type', 'frameworkNode');
+                                                        e.dataTransfer.setData('application/reactflow/frameworkId', fw.id);
+                                                        e.dataTransfer.effectAllowed = 'move';
+                                                    }}
+                                                    className="px-3 py-2 bg-zinc-800/20 hover:bg-zinc-800 hover:border-zinc-700 border border-transparent rounded-md cursor-grab active:cursor-grabbing transition group flex items-center justify-between"
+                                                >
+                                                    <span className="text-xs text-zinc-400 group-hover:text-zinc-200 truncate" title={fw.name}>{fw.name}</span>
+                                                    {/* Drag Handle Indicator */}
+                                                    <div className="opacity-0 group-hover:opacity-100">
+                                                        <div className="grid grid-cols-2 gap-0.5">
+                                                            <div className="w-0.5 h-0.5 bg-zinc-500 rounded-full" />
+                                                            <div className="w-0.5 h-0.5 bg-zinc-500 rounded-full" />
+                                                            <div className="w-0.5 h-0.5 bg-zinc-500 rounded-full" />
+                                                            <div className="w-0.5 h-0.5 bg-zinc-500 rounded-full" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                             );
-                        })()}
-                    </div>
-                </Panel>
+                        };
 
-                <Panel position="top-right" className="flex gap-2">
-                    <button
-                        draggable
-                        onDragStart={(event) => {
-                            event.dataTransfer.setData('application/reactflow/type', 'stickyNote');
-                            event.dataTransfer.effectAllowed = 'move';
+                        const general = allFrameworks.filter(f => f.category === 'general');
+                        const specific = allFrameworks.filter(f => f.category === 'case-specific');
+
+                        return (
+                            <>
+                                <FrameworkGroup title="General Models" items={general} defaultOpen={true} />
+                                <FrameworkGroup title="Case Specific" items={specific} defaultOpen={false} />
+                            </>
+                        );
+                    })()}
+                </div>
+            </div>
+
+            {/* Toggle Sidebar Button (Floating on edge or attached) */}
+            <div className="relative h-full flex-1 flex flex-col" ref={reactFlowWrapper}>
+                <button
+                    onClick={() => setIsSidebarOpen(!isSidebarOpen)}
+                    className={`
+                        absolute top-1/2 -translate-y-1/2 z-10 p-1 bg-zinc-800 border-y border-r border-zinc-700 rounded-r-lg text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700 transition-all
+                        ${isSidebarOpen ? 'left-0' : 'left-0'} 
+                    `}
+                    style={{ left: 0 }} // Actually attached to the container edge
+                    title={isSidebarOpen ? "Collapse Tools" : "Expand Tools"}
+                >
+                    {isSidebarOpen ? <ChevronRight size={14} className="rotate-180" /> : <ChevronRight size={14} />}
+                </button>
+
+                <ReactFlow
+                    nodes={nodes}
+                    edges={edges}
+                    onNodesChange={onNodesChange}
+                    onEdgesChange={onEdgesChange}
+                    onConnect={onConnect}
+                    onInit={setReactFlowInstance}
+                    onDrop={onDrop}
+                    onDragOver={onDragOver}
+                    nodeTypes={nodeTypes}
+                    defaultEdgeOptions={defaultEdgeOptions}
+                    fitView
+                    className="bg-zinc-950"
+                    deleteKeyCode={['Backspace', 'Delete']}
+                    connectionMode={ConnectionMode.Loose}
+                >
+                    <Background gap={20} color="#3f3f46" variant={BackgroundVariant.Dots} size={1} />
+                    <Controls className="bg-zinc-800 border-zinc-800 fill-zinc-400" />
+                    <MiniMap
+                        nodeColor={(n: Node) => {
+                            if (n.type === 'frameworkNode') return '#10b981';
+                            if (n.type === 'stickyNote') {
+                                const data = n.data as any;
+                                return data.color || '#fef08a';
+                            }
+                            if (n.type === 'imageNode') return '#3b82f6';
+                            return '#fff';
                         }}
-                        onClick={addStickyNote}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg shadow-lg border border-zinc-800 transition cursor-grab active:cursor-grabbing"
-                    >
-                        <StickyNote size={16} className="text-yellow-400" />
-                        <span>Add Note</span>
-                    </button>
+                        className="bg-zinc-900 border border-zinc-900 rounded-lg overflow-hidden"
+                        maskColor="rgba(0, 0, 0, 0.7)"
+                    />
 
-                    {!isGuest && (
+                    <Panel position="top-right" className="flex gap-2">
                         <button
-                            onClick={handleShare}
-                            disabled={isSharing}
-                            className="flex items-center gap-2 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg shadow-lg transition"
-                            title="Share Project"
+                            draggable
+                            onDragStart={(event) => {
+                                event.dataTransfer.setData('application/reactflow/type', 'stickyNote');
+                                event.dataTransfer.effectAllowed = 'move';
+                            }}
+                            onClick={addStickyNote}
+                            className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg shadow-lg border border-zinc-800 transition cursor-grab active:cursor-grabbing"
                         >
-                            {isSharing ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />}
-                            <span>Share</span>
+                            <StickyNote size={16} className="text-yellow-400" />
+                            <span>Add Note</span>
                         </button>
-                    )}
 
-                    <button
-                        onClick={downloadImage}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-blue-400 rounded-lg shadow-lg border border-zinc-700 transition"
-                        title="Download as PNG"
-                    >
-                        <Download size={16} />
-                        <span>Export</span>
-                    </button>
-                    {isClearing ? (
-                        <div className="flex gap-1 bg-zinc-800 rounded-lg shadow-lg border border-red-900/50 p-0.5">
+                        {!isGuest && (
                             <button
-                                onClick={clearCanvas}
-                                className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md text-xs font-bold transition flex items-center gap-1"
+                                onClick={handleShare}
+                                disabled={isSharing}
+                                className="flex items-center gap-2 px-3 py-2 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg shadow-lg transition"
+                                title="Share Project"
                             >
-                                <Trash2 size={12} /> Confirm
+                                {isSharing ? <Loader2 size={16} className="animate-spin" /> : <Share2 size={16} />}
+                                <span>Share</span>
                             </button>
+                        )}
+
+                        <button
+                            onClick={downloadImage}
+                            className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-blue-400 rounded-lg shadow-lg border border-zinc-700 transition"
+                            title="Download as PNG"
+                        >
+                            <Download size={16} />
+                            <span>Export</span>
+                        </button>
+                        {isClearing ? (
+                            <div className="flex gap-1 bg-zinc-800 rounded-lg shadow-lg border border-red-900/50 p-0.5">
+                                <button
+                                    onClick={clearCanvas}
+                                    className="px-3 py-1.5 bg-red-600 hover:bg-red-700 text-white rounded-md text-xs font-bold transition flex items-center gap-1"
+                                >
+                                    <Trash2 size={12} /> Confirm
+                                </button>
+                                <button
+                                    onClick={() => setIsClearing(false)}
+                                    className="px-3 py-1.5 hover:bg-zinc-700 text-zinc-400 rounded-md text-xs transition"
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        ) : (
                             <button
-                                onClick={() => setIsClearing(false)}
-                                className="px-3 py-1.5 hover:bg-zinc-700 text-zinc-400 rounded-md text-xs transition"
+                                onClick={() => setIsClearing(true)}
+                                className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded-lg shadow-lg border border-zinc-800 transition"
                             >
-                                Cancel
+                                <Trash2 size={16} />
+                                <span>Clear</span>
                             </button>
+                        )}
+                        <div className="flex items-center gap-2 px-3 py-2 bg-zinc-900/80 backdrop-blur text-xs text-zinc-400 rounded-lg border border-zinc-800">
+                            {isSaved ? <span className="text-emerald-500 flex items-center gap-1"><Save size={12} /> Saved</span> : 'Saving...'}
                         </div>
-                    ) : (
-                        <button
-                            onClick={() => setIsClearing(true)}
-                            className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded-lg shadow-lg border border-zinc-800 transition"
-                        >
-                            <Trash2 size={16} />
-                            <span>Clear</span>
-                        </button>
-                    )}
-                    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-900/80 backdrop-blur text-xs text-zinc-400 rounded-lg border border-zinc-800">
-                        {isSaved ? <span className="text-emerald-500 flex items-center gap-1"><Save size={12} /> Saved</span> : 'Saving...'}
-                    </div>
-                </Panel>
-            </ReactFlow>
+                    </Panel>
+                </ReactFlow>
+            </div>
         </div>
     );
 };
