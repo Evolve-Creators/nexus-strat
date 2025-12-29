@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { account } from '../lib/appwrite';
+import { account } from '../../lib/appwrite';
 import { ID } from 'appwrite';
-import { useAuth } from '../context/AuthContext';
+import { useAuth } from '../../context/AuthContext';
 import { Loader2 } from 'lucide-react';
 
 export default function AuthPage() {
-    const { checkAuth } = useAuth();
+    const { checkAuth, loginAsGuest } = useAuth();
     const [isLogin, setIsLogin] = useState(true);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -112,7 +112,23 @@ export default function AuthPage() {
                         </button>
                     </div>
                 </form>
+
+                <div className="mt-6 pt-6 border-t border-border text-center">
+                    <button
+                        type="button"
+                        onClick={(e) => {
+                            e.preventDefault();
+                            loginAsGuest();
+                        }}
+                        className="text-sm text-muted hover:text-primary transition-colors font-medium underline underline-offset-4"
+                    >
+                        Continue as Guest
+                    </button>
+                    <p className="text-xs text-muted mt-2">
+                        Guest work is saved to this device only.
+                    </p>
+                </div>
             </div>
-        </div>
+        </div >
     );
 }

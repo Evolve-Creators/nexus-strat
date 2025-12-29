@@ -5,10 +5,14 @@ import './index.css'
 
 import { ThemeProvider } from './context/ThemeContext.tsx'
 
+import ErrorBoundary from './components/ErrorBoundary.tsx'
+
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <ThemeProvider>
-      <App />
-    </ThemeProvider>
+    <ErrorBoundary>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </ErrorBoundary>
   </React.StrictMode>,
 )

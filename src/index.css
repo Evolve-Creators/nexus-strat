@@ -2,7 +2,7 @@
 
 @layer base {
   :root {
-    /* Light Mode Variables */
+    /* Light Mode Variables - Standard Zinc */
     --bg-main: #f4f4f5;
     /* zinc-100 */
     --bg-sidebar: #ffffff;
@@ -20,16 +20,16 @@
 
     --accent: #10b981;
     /* emerald-500 */
-
     --font-family: 'Inter', system-ui, -apple-system, sans-serif;
   }
 
   /* Dark Mode Overrides */
+  /* Dark Mode Overrides - Standard Zinc Theme */
   :root.dark {
     --bg-main: #09090b;
     /* zinc-950 */
-    --bg-sidebar: #09090b;
-    /* Changed to match main dark bg or slightly lighter */
+    --bg-sidebar: #18181b;
+    /* zinc-900 */
     --bg-card: #18181b;
     /* zinc-900 */
     --bg-hover: #27272a;
@@ -37,12 +37,11 @@
 
     --text-main: #fafafa;
     /* zinc-50 */
-    /* --text-muted stays mostly same or slightly lighter? */
     --text-muted: #a1a1aa;
     /* zinc-400 */
     --text-inverted: #000000;
 
-    --border-color: #27272a;
+    --border-color: #27272a !important;
     /* zinc-800 */
   }
 

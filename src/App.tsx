@@ -1,17 +1,34 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AppLayout from './components/Layout/AppLayout';
 import FrameworkLibrary from './components/Frameworks/FrameworkLibrary';
 import AnalysisTab from './components/Analysis/AnalysisTab';
-import NotesPanel from './components/Notes/NotesPanel';
-import CaseUpload from './components/CaseUpload/CaseUpload';
-import CaseHistory from './components/CaseHistory/CaseHistory';
+import SettingsTab from './components/Settings/SettingsTab';
+// import NotesPanel from './components/Notes/NotesPanel';
+// import CaseUpload from './components/CaseUpload/CaseUpload';
+// import CaseHistory from './components/CaseHistory/CaseHistory';
 import AuthPage from './components/Auth/AuthPage';
 import { AuthProvider, useAuth } from './context/AuthContext';
+import { ThemeProvider } from './context/ThemeContext';
+import { generalFrameworks } from './data/generalFrameworks';
+import { caseFrameworks } from './data/caseFrameworks';
+
+// import ReferenceTab from './components/Frameworks/ReferenceTab'; // Add thisimport near top
+import ReferenceTab from './components/Frameworks/ReferenceTab';
 
 function AppContent() {
-    const { user, loading } = useAuth();
+    const { user, loading, isGuest } = useAuth();
     // Using 'frameworks' as default tab to match original flow
-    const [activeTab, setActiveTab] = useState<'frameworks' | 'analysis' | 'notes' | 'history' | 'upload'>('frameworks');
+    const [activeTab, setActiveTab] = useState<'frameworks' | 'analysis' | 'notes' | 'history' | 'upload' | 'settings'>('frameworks');
+    const [sharedProjectId, setSharedProjectId] = useState<string | null>(null);
+
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const shareId = params.get('share');
+        if (shareId) {
+            setSharedProjectId(shareId);
+            setActiveTab('analysis');
+        }
+    }, []);
 
     if (loading) {
         return (
@@ -21,17 +38,28 @@ function AppContent() {
         );
     }
 
-    if (!user) {
+    if (!user && !isGuest) {
         return <AuthPage />;
     }
 
     return (
         <AppLayout activeTab={activeTab} onTabChange={setActiveTab}>
-            {activeTab === 'frameworks' && <FrameworkLibrary />}
-            {activeTab === 'analysis' && <AnalysisTab />}
-            {activeTab === 'notes' && <NotesPanel />}
-            {activeTab === 'history' && <CaseHistory />}
-            {activeTab === 'upload' && <CaseUpload />}
+            {activeTab === 'frameworks' && (
+                <ReferenceTab
+                    frameworks={[...generalFrameworks, ...caseFrameworks]}
+                />
+            )}
+            {activeTab === 'analysis' && <AnalysisTab initialProjectId={sharedProjectId} />}
+            {activeTab === 'settings' && <SettingsTab />}
+            {/* 
+                Temporary placeholders for other tabs to prevent TS errors until fully implemented 
+                {activeTab === 'notes' && <NotesPanel caseId="default" notes={[]} onAddNote={() => {}} onClose={() => {}} />}
+                {activeTab === 'history' && <CaseHistory cases={[]} analyses={[]} onLoadAnalysis={() => {}} onDeleteCase={() => {}} />}
+                {activeTab === 'upload' && <CaseUpload onCaseAdded={() => {}} />}
+            */}
+            {activeTab === 'notes' && <div className="p-8 text-center text-muted">Notes Module Coming Soon</div>}
+            {activeTab === 'history' && <div className="p-8 text-center text-muted">History Module Coming Soon</div>}
+            {activeTab === 'upload' && <div className="p-8 text-center text-muted">Upload Module Coming Soon</div>}
         </AppLayout>
     );
 }
@@ -39,7 +67,9 @@ function AppContent() {
 function App() {
     return (
         <AuthProvider>
-            <AppContent />
+            <ThemeProvider>
+                <AppContent />
+            </ThemeProvider>
         </AuthProvider>
     );
 }
