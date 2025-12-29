@@ -1,0 +1,91 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Light Mode Variables */
+    --bg-main: #f4f4f5;
+    /* zinc-100 */
+    --bg-sidebar: #ffffff;
+    --bg-card: #ffffff;
+    --bg-hover: #f4f4f5;
+
+    --text-main: #18181b;
+    /* zinc-900 */
+    --text-muted: #71717a;
+    /* zinc-500 */
+    --text-inverted: #ffffff;
+
+    --border-color: #e4e4e7;
+    /* zinc-200 */
+
+    --accent: #10b981;
+    /* emerald-500 */
+
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  /* Dark Mode Overrides */
+  :root.dark {
+    --bg-main: #09090b;
+    /* zinc-950 */
+    --bg-sidebar: #09090b;
+    /* Changed to match main dark bg or slightly lighter */
+    --bg-card: #18181b;
+    /* zinc-900 */
+    --bg-hover: #27272a;
+    /* zinc-800 */
+
+    --text-main: #fafafa;
+    /* zinc-50 */
+    /* --text-muted stays mostly same or slightly lighter? */
+    --text-muted: #a1a1aa;
+    /* zinc-400 */
+    --text-inverted: #000000;
+
+    --border-color: #27272a;
+    /* zinc-800 */
+  }
+
+  body {
+    background-color: var(--bg-main);
+    color: var(--text-main);
+    @apply antialiased transition-colors duration-300;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-color);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--text-muted);
+}
+
+/* Glassmorphism Utilities */
+.glass-panel {
+  @apply backdrop-blur-xl border shadow-2xl;
+  background-color: color-mix(in srgb, var(--bg-card), transparent 60%);
+  border-color: color-mix(in srgb, var(--border-color), transparent 80%);
+}
+
+.glass-card {
+  @apply backdrop-blur-md border shadow-lg transition-all duration-300;
+  background-color: color-mix(in srgb, var(--bg-card), transparent 50%);
+  border-color: var(--border-color);
+}
+
+.glass-card:hover {
+  border-color: var(--accent);
+}
