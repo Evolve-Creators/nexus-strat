@@ -351,14 +351,36 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
                     maskColor="rgba(0, 0, 0, 0.7)"
                 />
 
-                {/* Back Button Panel */}
-                <Panel position="top-left" className="m-2">
+                <Panel position="top-left" className="m-2 flex flex-col gap-4 max-h-[80vh]">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg shadow-lg border border-zinc-800 transition"
+                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg shadow-lg border border-zinc-800 transition w-fit"
                     >
                         <span>← Dashboard</span>
                     </button>
+
+                    <div className="bg-zinc-900/90 backdrop-blur border border-zinc-800 rounded-xl p-3 shadow-xl flex flex-col gap-3 min-w-[200px] overflow-y-auto custom-scrollbar">
+                        <div className="flex items-center gap-2 text-zinc-400 border-b border-zinc-800 pb-2">
+                            <span className="text-xs font-bold uppercase tracking-wider">Frameworks</span>
+                        </div>
+                        <div className="flex flex-col gap-2">
+                            {allFrameworks.map(fw => (
+                                <div
+                                    key={fw.id}
+                                    draggable
+                                    onDragStart={(e) => {
+                                        e.dataTransfer.setData('application/reactflow/type', 'frameworkNode');
+                                        e.dataTransfer.setData('application/reactflow/frameworkId', fw.id);
+                                        e.dataTransfer.effectAllowed = 'move';
+                                    }}
+                                    className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 border border-zinc-700/50 rounded-lg cursor-grab active:cursor-grabbing transition group flex items-center justify-between"
+                                >
+                                    <span className="text-xs font-medium text-zinc-300 group-hover:text-white truncate" title={fw.name}>{fw.name}</span>
+                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-500 transition-colors" />
+                                </div>
+                            ))}
+                        </div>
+                    </div>
                 </Panel>
 
                 <Panel position="top-right" className="flex gap-2">
