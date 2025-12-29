@@ -24,7 +24,7 @@ import StickyNoteNode from './nodes/StickyNoteNode';
 import ImageNode from './nodes/ImageNode';
 import { Framework } from '../../types';
 import { v4 as uuidv4 } from 'uuid';
-import { Save, StickyNote, Trash2, Download, Loader2, Share2 } from 'lucide-react';
+import { Save, StickyNote, Trash2, Download, Loader2, Share2, ChevronDown, ChevronRight } from 'lucide-react';
 import { databases, DB_ID, COLLECTION_PROJECTS, saveProjectData, shareProject } from '../../lib/appwrite';
 
 const nodeTypes = {
@@ -359,27 +359,58 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
                         <span>← Dashboard</span>
                     </button>
 
-                    <div className="bg-zinc-900/90 backdrop-blur border border-zinc-800 rounded-xl p-3 shadow-xl flex flex-col gap-3 min-w-[200px] overflow-y-auto custom-scrollbar">
-                        <div className="flex items-center gap-2 text-zinc-400 border-b border-zinc-800 pb-2">
-                            <span className="text-xs font-bold uppercase tracking-wider">Frameworks</span>
+                    <div className="bg-zinc-900/90 backdrop-blur border border-zinc-800 rounded-xl p-3 shadow-xl flex flex-col gap-2 min-w-[220px] max-h-[60vh] overflow-y-auto custom-scrollbar">
+                        <div className="flex items-center gap-2 text-zinc-500 border-b border-zinc-800 pb-2 mb-1 px-1">
+                            <span className="text-[10px] font-bold uppercase tracking-widest">Framework Library</span>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            {allFrameworks.map(fw => (
-                                <div
-                                    key={fw.id}
-                                    draggable
-                                    onDragStart={(e) => {
-                                        e.dataTransfer.setData('application/reactflow/type', 'frameworkNode');
-                                        e.dataTransfer.setData('application/reactflow/frameworkId', fw.id);
-                                        e.dataTransfer.effectAllowed = 'move';
-                                    }}
-                                    className="px-3 py-2 bg-zinc-800 hover:bg-zinc-700 hover:border-zinc-600 border border-zinc-700/50 rounded-lg cursor-grab active:cursor-grabbing transition group flex items-center justify-between"
-                                >
-                                    <span className="text-xs font-medium text-zinc-300 group-hover:text-white truncate" title={fw.name}>{fw.name}</span>
-                                    <div className="w-1.5 h-1.5 rounded-full bg-emerald-500/50 group-hover:bg-emerald-500 transition-colors" />
-                                </div>
-                            ))}
-                        </div>
+
+                        {/* Helper Component for Groups */}
+                        {(() => {
+                            const FrameworkGroup = ({ title, items, defaultOpen = false }: { title: string, items: Framework[], defaultOpen?: boolean }) => {
+                                const [isOpen, setIsOpen] = useState(defaultOpen);
+                                return (
+                                    <div className="flex flex-col gap-1">
+                                        <button
+                                            onClick={() => setIsOpen(!isOpen)}
+                                            className="flex items-center gap-2 px-2 py-1.5 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-800/50 rounded-lg transition-all w-full text-left"
+                                        >
+                                            {isOpen ? <ChevronDown size={14} /> : <ChevronRight size={14} />}
+                                            <span className="text-xs font-semibold">{title}</span>
+                                            <span className="ml-auto text-[10px] opacity-50 bg-zinc-800 px-1.5 rounded-full">{items.length}</span>
+                                        </button>
+
+                                        {isOpen && (
+                                            <div className="flex flex-col gap-1 pl-2 border-l border-zinc-800 ml-3">
+                                                {items.map(fw => (
+                                                    <div
+                                                        key={fw.id}
+                                                        draggable
+                                                        onDragStart={(e) => {
+                                                            e.dataTransfer.setData('application/reactflow/type', 'frameworkNode');
+                                                            e.dataTransfer.setData('application/reactflow/frameworkId', fw.id);
+                                                            e.dataTransfer.effectAllowed = 'move';
+                                                        }}
+                                                        className="px-3 py-2 bg-zinc-800/40 hover:bg-zinc-800 hover:border-zinc-700 border border-transparent rounded-md cursor-grab active:cursor-grabbing transition group flex items-center justify-between"
+                                                    >
+                                                        <span className="text-xs text-zinc-400 group-hover:text-zinc-200 truncate" title={fw.name}>{fw.name}</span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        )}
+                                    </div>
+                                );
+                            };
+
+                            const general = allFrameworks.filter(f => f.category === 'general');
+                            const specific = allFrameworks.filter(f => f.category === 'case-specific');
+
+                            return (
+                                <>
+                                    <FrameworkGroup title="General Models" items={general} defaultOpen={true} />
+                                    <FrameworkGroup title="Case Specific" items={specific} defaultOpen={false} />
+                                </>
+                            );
+                        })()}
                     </div>
                 </Panel>
 
