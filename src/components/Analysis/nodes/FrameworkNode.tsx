@@ -60,7 +60,7 @@ function FrameworkNode({ data, selected }: NodeProps<any>) {
                 <div className="flex items-center gap-1">
                     <button
                         onClick={downloadNode}
-                        className="p-1.5 rounded-lg hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-colors"
+                        className="p-1.5 rounded-lg hover:bg-emerald-500/10 text-zinc-500 hover:text-emerald-500 transition-colors nodrag"
                         title="Download Framework Image"
                     >
                         <Download size={16} />
@@ -72,7 +72,7 @@ function FrameworkNode({ data, selected }: NodeProps<any>) {
                                 data.onDelete?.();
                             }
                         }}
-                        className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-colors"
+                        className="p-1.5 rounded-lg bg-red-500/10 text-red-400 hover:bg-red-500 hover:text-white transition-colors nodrag"
                         title="Delete Framework"
                     >
                         <X size={16} />
