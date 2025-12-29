@@ -61,14 +61,14 @@ export default function FourMDiagram({
                             </div>
 
                             {/* Label Box (Chevron Start) */}
-                            <div className="w-48 h-20 bg-zinc-800 -ml-6 pl-10 pr-6 flex items-center justify-center clip-path-chevron-left shadow-lg relative z-10">
+                            <div className="w-48 h-20 bg-zinc-800 -ml-6 pl-10 pr-6 flex items-center justify-center clip-path-chevron-left shadow-lg relative z-10 border-zinc-900">
                                 <h3 className="text-lg font-bold text-cyan-100 tracking-wider">
                                     {row.label}
                                 </h3>
                             </div>
 
                             {/* Description Box (Chevron Body) */}
-                            <div className="flex-1 h-24 -ml-4 pl-12 pr-12 bg-zinc-900/80 backdrop-blur-md border-y border-r border-cyan-500/30 rounded-r-xl flex items-center relative overflow-hidden group-hover:border-cyan-500/60 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all">
+                            <div className="flex-1 h-24 -ml-4 pl-12 pr-12 bg-zinc-900/80 backdrop-blur-md border-y border-r border-zinc-900 rounded-r-xl flex items-center relative overflow-hidden group-hover:border-cyan-500/60 group-hover:shadow-[0_0_15px_rgba(34,211,238,0.1)] transition-all">
                                 {/* Dashed Outline Effect inside */}
                                 <div className="absolute inset-2 border border-dashed border-cyan-500/20 rounded-lg pointer-events-none" />
 

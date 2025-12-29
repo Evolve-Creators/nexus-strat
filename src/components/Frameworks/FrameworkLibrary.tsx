@@ -12,7 +12,7 @@ function FrameworkLibrary({ frameworks, onSelectFramework }: FrameworkLibraryPro
     const FrameworkCard = ({ framework }: { framework: Framework }) => (
         <div
             onClick={() => onSelectFramework(framework.id)}
-            className="group relative flex flex-col justify-between p-8 cursor-pointer transition-all duration-300 hover:-translate-y-1 rounded-3xl border border-zinc-800 bg-zinc-900/40 backdrop-blur-xl shadow-sm hover:shadow-md h-[200px]"
+            className="group relative flex flex-col justify-between p-8 cursor-pointer transition-all duration-300 hover:-translate-y-1 rounded-3xl border border-zinc-900 bg-zinc-900/40 backdrop-blur-xl shadow-sm hover:shadow-md h-[200px]"
             onMouseOver={(e) => {
                 e.currentTarget.style.transform = 'translateY(-4px)';
                 e.currentTarget.style.boxShadow = '0 20px 40px -5px rgba(0,0,0,0.1)';

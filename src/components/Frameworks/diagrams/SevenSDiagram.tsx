@@ -70,7 +70,7 @@ export default function SevenSDiagram({
     return (
         <div className="min-w-[900px] h-[700px] bg-zinc-950 relative flex items-center justify-center font-sans">
             {/* Title moved to absolute top-2 to prevent overlap */}
-            <h2 className="absolute top-2 text-purple-500 text-2xl font-light tracking-[0.2em] uppercase opacity-90 border-b border-zinc-800 pb-4 z-10 w-full max-w-2xl text-center">
+            <h2 className="absolute top-2 text-purple-500 text-2xl font-light tracking-[0.2em] uppercase opacity-90 border-b border-zinc-900 pb-4 z-10 w-full max-w-2xl text-center">
                 McKinsey 7S Framework
             </h2>
 

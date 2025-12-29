@@ -337,7 +337,7 @@ const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, 
                 connectionMode={ConnectionMode.Loose}
             >
                 <Background gap={20} color="#3f3f46" variant={BackgroundVariant.Dots} size={1} />
-                <Controls className="bg-zinc-800 border-zinc-700 fill-zinc-400" />
+                <Controls className="bg-zinc-800 border-zinc-800 fill-zinc-400" />
                 <MiniMap
                     nodeColor={(n: Node) => {
                         if (n.type === 'frameworkNode') return '#10b981';
@@ -348,7 +348,7 @@ const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, 
                         if (n.type === 'imageNode') return '#3b82f6';
                         return '#fff';
                     }}
-                    className="bg-zinc-900 border border-zinc-800 rounded-lg overflow-hidden"
+                    className="bg-zinc-900 border border-zinc-900 rounded-lg overflow-hidden"
                     maskColor="rgba(0, 0, 0, 0.7)"
                 />
 
@@ -356,7 +356,7 @@ const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, 
                 <Panel position="top-left" className="m-2">
                     <button
                         onClick={onBack}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg shadow-lg border border-zinc-700 transition"
+                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-300 rounded-lg shadow-lg border border-zinc-800 transition"
                     >
                         <span>← Dashboard</span>
                     </button>
@@ -370,7 +370,7 @@ const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, 
                             event.dataTransfer.effectAllowed = 'move';
                         }}
                         onClick={addStickyNote}
-                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg shadow-lg border border-zinc-700 transition cursor-grab active:cursor-grabbing"
+                        className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-zinc-100 rounded-lg shadow-lg border border-zinc-800 transition cursor-grab active:cursor-grabbing"
                     >
                         <StickyNote size={16} className="text-yellow-400" />
                         <span>Add Note</span>
@@ -414,13 +414,13 @@ const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, 
                     ) : (
                         <button
                             onClick={() => setIsClearing(true)}
-                            className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded-lg shadow-lg border border-zinc-700 transition"
+                            className="flex items-center gap-2 px-3 py-2 bg-zinc-800 hover:bg-zinc-700 text-red-400 rounded-lg shadow-lg border border-zinc-800 transition"
                         >
                             <Trash2 size={16} />
                             <span>Clear</span>
                         </button>
                     )}
-                    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-900/80 backdrop-blur text-xs text-zinc-400 rounded-lg border border-zinc-700">
+                    <div className="flex items-center gap-2 px-3 py-2 bg-zinc-900/80 backdrop-blur text-xs text-zinc-400 rounded-lg border border-zinc-800">
                         {isSaved ? <span className="text-emerald-500 flex items-center gap-1"><Save size={12} /> Saved</span> : 'Saving...'}
                     </div>
                 </Panel>

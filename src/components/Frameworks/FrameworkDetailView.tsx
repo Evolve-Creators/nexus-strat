@@ -14,7 +14,7 @@ export default function FrameworkDetailView({ framework, onBack }: FrameworkDeta
     return (
         <div className="h-full flex flex-col bg-canvas text-primary transition-colors duration-300">
             {/* Header */}
-            <div className="flex items-center gap-4 p-6 border-b border-border bg-card/50 backdrop-blur-md sticky top-0 z-20">
+            <div className="flex items-center gap-4 p-6 bg-zinc-950 sticky top-0 z-20 border-b-0 shadow-none">
                 <button
                     onClick={onBack}
                     className="p-2 hover:bg-hover rounded-full transition-colors text-muted hover:text-primary"
@@ -45,7 +45,7 @@ export default function FrameworkDetailView({ framework, onBack }: FrameworkDeta
                 <div className="flex-1 bg-canvas relative overflow-auto h-full w-full">
                     {/* Centered Scrollable Container */}
                     <div className="min-h-full min-w-full flex items-start justify-center p-8">
-                        <div className="w-full max-w-[1200px] bg-card/40 border border-border rounded-2xl p-4 md:p-8 shadow-2xl relative">
+                        <div className="w-full max-w-[1200px] bg-zinc-900/20 backdrop-blur-2xl border border-zinc-950 rounded-2xl p-4 md:p-8 shadow-2xl relative">
                             {/* Diagram Component */}
                             <FrameworkDiagram
                                 framework={framework}
@@ -60,7 +60,7 @@ export default function FrameworkDetailView({ framework, onBack }: FrameworkDeta
                 {/* Info Sidebar (Rich Content) - Collapsible */}
                 <div
                     className={`
-                        border-l border-border bg-card/60 overflow-y-auto 
+                        border-l border-zinc-950 bg-card/60 overflow-y-auto 
                         transition-all duration-300 ease-in-out
                         ${isSidebarOpen ? 'w-[400px] p-6 opacity-100' : 'w-0 p-0 opacity-0 overflow-hidden'}
                     `}

@@ -35,7 +35,7 @@ export default function AMODiagram({
             <div className="absolute top-0 left-1/4 w-1/2 h-1/2 bg-orange-600/10 blur-[120px] rounded-full pointer-events-none" />
 
             {/* Neon Title */}
-            <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-200 text-3xl font-light tracking-[0.2em] uppercase border-b border-orange-900/50 pb-4 mb-8 z-10 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]">
+            <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 to-orange-200 text-3xl font-light tracking-[0.2em] uppercase border-b border-zinc-900 pb-4 mb-8 z-10 drop-shadow-[0_0_10px_rgba(249,115,22,0.5)]">
                 {framework.name}
             </h2>
 
@@ -53,7 +53,7 @@ export default function AMODiagram({
                     return (
                         <div
                             key={col.id}
-                            className="flex-1 flex flex-col h-full bg-zinc-900/80 backdrop-blur-md border border-orange-500/30 rounded-xl overflow-hidden group hover:border-orange-500 hover:shadow-[0_0_20px_rgba(249,115,22,0.2)] transition-all duration-300"
+                            className="flex-1 flex flex-col h-full bg-zinc-900/80 backdrop-blur-md border border-zinc-900 rounded-xl overflow-hidden group hover:border-orange-500 hover:shadow-[0_0_20px_rgba(249,115,22,0.2)] transition-all duration-300"
                         >
                             {/* Neon Header */}
                             <div className="bg-orange-500/10 p-5 text-center border-b border-orange-500/30 group-hover:bg-orange-500/20 transition-colors">

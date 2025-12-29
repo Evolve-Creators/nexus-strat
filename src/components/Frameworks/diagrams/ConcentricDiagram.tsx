@@ -31,7 +31,7 @@ export default function ConcentricDiagram({
 
             {/* 1. TAM (Top Section) - Widest */}
             <div className="w-full h-[33%] relative flex flex-col items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-sky-900/20 to-sky-900/5 border border-sky-500/30 rounded-t-xl clip-trapezoid-top backdrop-blur-sm transition-all hover:bg-sky-900/30 hover:border-sky-500/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-sky-900/20 to-sky-900/5 border border-sky-900 rounded-t-xl clip-trapezoid-top backdrop-blur-sm transition-all hover:bg-sky-900/30 hover:border-sky-500/50"></div>
                 <div className="z-10 flex flex-col items-center w-full px-4 text-center">
                     <div className="flex flex-col items-center gap-0.5 mb-2 pointer-events-auto">
                         <h4 className="text-xl font-bold text-sky-400 tracking-widest drop-shadow-md">{tam.name}</h4>
@@ -54,7 +54,7 @@ export default function ConcentricDiagram({
 
             {/* 2. SAM (Middle Section) - Medium Width */}
             <div className="w-[75%] h-[33%] relative flex flex-col items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-blue-900/5 border-x border-b border-blue-500/30 backdrop-blur-sm transition-all hover:bg-blue-900/30 hover:border-blue-500/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-blue-900/20 to-blue-900/5 border-x border-b border-blue-900 backdrop-blur-sm transition-all hover:bg-blue-900/30 hover:border-blue-500/50"></div>
                 <div className="z-10 flex flex-col items-center w-full px-4 text-center">
                     <div className="flex flex-col items-center gap-0.5 mb-2 pointer-events-auto">
                         <h4 className="text-xl font-bold text-blue-300 tracking-widest drop-shadow-md">{sam.name}</h4>
@@ -77,7 +77,7 @@ export default function ConcentricDiagram({
 
             {/* 3. SOM (Bottom Section) - Narrowest */}
             <div className="w-[50%] h-[33%] relative flex flex-col items-center justify-center">
-                <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-indigo-900/5 border-x border-b border-indigo-500/30 rounded-b-xl backdrop-blur-sm transition-all hover:bg-indigo-900/30 hover:border-indigo-500/50"></div>
+                <div className="absolute inset-0 bg-gradient-to-b from-indigo-900/20 to-indigo-900/5 border-x border-b border-indigo-900 rounded-b-xl backdrop-blur-sm transition-all hover:bg-indigo-900/30 hover:border-indigo-500/50"></div>
                 <div className="z-10 flex flex-col items-center w-full px-4 text-center">
                     <div className="flex flex-col items-center gap-0.5 mb-2 pointer-events-auto">
                         <h4 className="text-xl font-bold text-indigo-200 tracking-widest drop-shadow-md">{som.name}</h4>

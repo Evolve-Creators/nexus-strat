@@ -1,7 +1,6 @@
-import React from 'react';
-import InteractiveNode from '../InteractiveNode';
-import { Framework } from '../../../types';
 import { TrendingUp, Search, Zap, ArrowRight, RefreshCw } from 'lucide-react';
+import { Framework } from '../../../types';
+import InteractiveNode from '../InteractiveNode';
 
 interface Props {
     framework: Framework;
@@ -162,16 +161,16 @@ export default function AnsoffCircleDiagram({ framework, content, interactive, o
                             {/* Sectors */}
                             <div className="absolute inset-2 rounded-full overflow-hidden">
                                 <div className="w-full h-full relative">
-                                    <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-emerald-900 border-r border-b border-white/10 flex items-center justify-center">
+                                    <div className="absolute top-0 left-0 w-1/2 h-1/2 bg-emerald-900 border-r border-b border-zinc-800 flex items-center justify-center">
                                         <span className="text-[9px] font-bold text-emerald-100 uppercase text-center leading-tight opacity-90">Market<br />Development</span>
                                     </div>
-                                    <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-emerald-700 border-l border-b border-white/10 flex items-center justify-center">
+                                    <div className="absolute top-0 right-0 w-1/2 h-1/2 bg-emerald-700 border-l border-b border-zinc-800 flex items-center justify-center">
                                         <span className="text-[9px] font-bold text-emerald-100 uppercase text-center leading-tight opacity-90">Diversi-<br />fication</span>
                                     </div>
-                                    <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-emerald-800 border-r border-t border-white/10 flex items-center justify-center">
+                                    <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-emerald-800 border-r border-t border-zinc-800 flex items-center justify-center">
                                         <span className="text-[9px] font-bold text-emerald-100 uppercase text-center leading-tight opacity-90">Market<br />Penetration</span>
                                     </div>
-                                    <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-emerald-600 border-l border-t border-white/10 flex items-center justify-center">
+                                    <div className="absolute bottom-0 right-0 w-1/2 h-1/2 bg-emerald-600 border-l border-t border-zinc-800 flex items-center justify-center">
                                         <span className="text-[9px] font-bold text-emerald-100 uppercase text-center leading-tight opacity-90">Product<br />Development</span>
                                     </div>
                                 </div>

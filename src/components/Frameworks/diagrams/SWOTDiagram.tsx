@@ -49,14 +49,14 @@ const SwotDiagram: React.FC<SwotDiagramProps> = ({
                 {/* Left Sidebar: Axis Labels */}
                 <div className="flex flex-col w-12 h-full gap-4 py-8">
                     {/* Internal Label - Spans top half */}
-                    <div className="flex-1 flex items-center justify-center relative border-l-2 border-zinc-700">
+                    <div className="flex-1 flex items-center justify-center relative border-l-2 border-zinc-800">
                         <div className="absolute -left-4 transform -rotate-90 text-zinc-500 font-bold tracking-[0.2em] text-xs whitespace-nowrap flex items-center gap-2">
                             INTERNAL
                         </div>
                     </div>
 
                     {/* External Label - Spans bottom half */}
-                    <div className="flex-1 flex items-center justify-center relative border-l-2 border-zinc-700">
+                    <div className="flex-1 flex items-center justify-center relative border-l-2 border-zinc-800">
                         <div className="absolute -left-4 transform -rotate-90 text-zinc-500 font-bold tracking-[0.2em] text-xs whitespace-nowrap flex items-center gap-2">
                             EXTERNAL
                         </div>
@@ -70,7 +70,7 @@ const SwotDiagram: React.FC<SwotDiagramProps> = ({
                         return (
                             <div
                                 key={cat.id}
-                                className={`bg-zinc-900 border border-zinc-700 rounded-xl p-6 flex flex-col hover:border-zinc-500 transition-colors shadow-sm relative group overflow-hidden`}
+                                className={`bg-zinc-900 border border-zinc-800 rounded-xl p-6 flex flex-col hover:border-zinc-600 transition-colors shadow-sm relative group overflow-hidden`}
                             >
                                 {/* Header */}
                                 <div className={`flex items-center gap-3 mb-3 pb-2 border-b border-zinc-800 ${cat.accent.replace('border-', 'text-')}`}>

@@ -41,7 +41,7 @@ export default function BCGMatrixDiagram({
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-emerald-900/10 blur-[120px] rounded-full pointer-events-none" />
 
             {/* Title */}
-            <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-200 text-3xl font-light tracking-[0.2em] uppercase border-b border-emerald-900/50 pb-4 mb-4 z-10 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">
+            <h2 className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 to-green-200 text-3xl font-light tracking-[0.2em] uppercase border-b border-zinc-900 pb-4 mb-4 z-10 drop-shadow-[0_0_10px_rgba(16,185,129,0.5)]">
                 {framework.name}
             </h2>
 
@@ -52,17 +52,17 @@ export default function BCGMatrixDiagram({
                 {/* Corner (Empty) */}
                 <div />
                 {/* High Share */}
-                <div className="flex items-center justify-center pb-2 bg-zinc-900/50 rounded-t border-b border-emerald-500/20">
+                <div className="flex items-center justify-center pb-2 bg-zinc-900/50 rounded-t border-b border-emerald-900">
                     <span className="text-emerald-500 font-bold tracking-widest text-sm uppercase">High Share</span>
                 </div>
                 {/* Low Share */}
-                <div className="flex items-center justify-center pb-2 bg-zinc-900/50 rounded-t border-b border-emerald-500/20">
+                <div className="flex items-center justify-center pb-2 bg-zinc-900/50 rounded-t border-b border-emerald-900">
                     <span className="text-emerald-500 font-bold tracking-widest text-sm uppercase">Low Share</span>
                 </div>
 
                 {/* Left Y-Axis Labels - SIMPLIFIED */}
                 {/* High Growth */}
-                <div className="flex items-center justify-center pr-2 bg-zinc-900/50 rounded-l border-r border-emerald-500/20">
+                <div className="flex items-center justify-center pr-2 bg-zinc-900/50 rounded-l border-r border-emerald-900">
                     <span className="text-emerald-500 font-bold tracking-widest text-sm uppercase writing-vertical-lr rotate-180">High Growth</span>
                 </div>
                 {/* Quadrant 1: Star */}
@@ -72,7 +72,7 @@ export default function BCGMatrixDiagram({
 
 
                 {/* Low Growth */}
-                <div className="flex items-center justify-center pr-2 bg-zinc-900/50 rounded-l border-r border-emerald-500/20">
+                <div className="flex items-center justify-center pr-2 bg-zinc-900/50 rounded-l border-r border-emerald-900">
                     <span className="text-emerald-500 font-bold tracking-widest text-sm uppercase writing-vertical-lr rotate-180">Low Growth</span>
                 </div>
                 {/* Quadrant 3: Cash Cow */}
@@ -103,9 +103,9 @@ export default function BCGMatrixDiagram({
         const Icon = quad.icon;
 
         return (
-            <div className={`relative bg-zinc-900/80 backdrop-blur-md border border-emerald-500/30 rounded-xl overflow-hidden group hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 flex flex-col p-4`}>
+            <div className={`relative bg-zinc-900/80 backdrop-blur-md border border-zinc-900 rounded-xl overflow-hidden group hover:border-emerald-500 hover:shadow-[0_0_20px_rgba(16,185,129,0.2)] transition-all duration-300 flex flex-col p-4`}>
                 {/* Header Icon + Label */}
-                <div className="flex flex-row items-center justify-between border-b border-emerald-500/30 pb-3 mb-3">
+                <div className="flex flex-row items-center justify-between border-b border-zinc-900 pb-3 mb-3">
                     <h3 className="text-emerald-400 text-xl font-bold tracking-widest uppercase drop-shadow-[0_0_5px_rgba(16,185,129,0.8)]">
                         {quad.label}
                     </h3>

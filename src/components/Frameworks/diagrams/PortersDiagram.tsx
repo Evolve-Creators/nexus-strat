@@ -34,7 +34,7 @@ export default function PortersDiagram({
 
     return (
         <div className="w-full h-full p-4 flex flex-col items-center bg-zinc-950 font-sans overflow-auto">
-            <h2 className="text-yellow-500 mb-8 text-2xl font-light tracking-[0.2em] uppercase opacity-90 border-b border-zinc-800 pb-4">
+            <h2 className="text-yellow-500 mb-8 text-2xl font-light tracking-[0.2em] uppercase opacity-90 border-b border-zinc-900 pb-4">
                 Porter's Industry 5 Forces
             </h2>
 
@@ -65,7 +65,7 @@ export default function PortersDiagram({
                                 <div className="h-8 w-px border-l-2 border-dashed border-yellow-500/30 group-hover:border-yellow-500/60 transition-colors"></div>
 
                                 {/* 4. CONTENT BOX */}
-                                <div className="w-full flex-1 flex flex-col bg-zinc-900/40 backdrop-blur-sm border border-zinc-800 group-hover:border-yellow-500/30 rounded-lg overflow-hidden transition-all duration-300 mt-0">
+                                <div className="w-full flex-1 flex flex-col bg-zinc-900/40 backdrop-blur-sm border border-zinc-900 group-hover:border-yellow-500/30 rounded-lg overflow-hidden transition-all duration-300 mt-0">
                                     {/* Red/Yellow Header Box */}
                                     <div className="bg-yellow-700/20 border-b border-yellow-900/30 p-2 text-center">
                                         <span className="text-yellow-500 text-xs font-bold uppercase tracking-wide">
@@ -77,7 +77,7 @@ export default function PortersDiagram({
                                     <div className="flex-1 p-3 overflow-y-auto custom-scrollbar flex flex-col gap-2">
                                         {/* Static Examples List */}
                                         {showDescriptions && defaultPoints.length > 0 && (
-                                            <ul className="list-disc list-outside ml-4 space-y-1 mb-4 border-b border-zinc-800/50 pb-2">
+                                            <ul className="list-disc list-outside ml-4 space-y-1 mb-4 border-b border-zinc-900/50 pb-2">
                                                 {defaultPoints.map((point, i) => (
                                                     <li key={i} className="text-zinc-400 text-xs leading-relaxed">
                                                         {point}

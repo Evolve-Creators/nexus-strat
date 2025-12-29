@@ -46,7 +46,7 @@ export default function MatrixDiagram({
             <div></div>
 
             {/* X-Axis Header */}
-            <div className="col-span-2 bg-zinc-900 border border-zinc-700 rounded-lg flex flex-col items-center justify-center p-2">
+            <div className="col-span-2 bg-zinc-900 border border-zinc-900 rounded-lg flex flex-col items-center justify-center p-2">
                 <div className="text-xs font-bold text-zinc-400 uppercase tracking-widest">{config.xAxis.label}</div>
                 <div className="w-full flex justify-between px-8 text-[10px] text-zinc-600 mt-1 uppercase">
                     <span>{isAnsoff ? config.xAxis.low : 'High'}</span>
@@ -55,7 +55,7 @@ export default function MatrixDiagram({
             </div>
 
             {/* Y-Axis Sidebar */}
-            <div className="row-span-2 bg-zinc-900 border border-zinc-700 rounded-lg flex flex-col items-center justify-center p-2">
+            <div className="row-span-2 bg-zinc-900 border border-zinc-900 rounded-lg flex flex-col items-center justify-center p-2">
                 <div className="writing-vertical-rl rotate-180 text-xs font-bold text-zinc-400 uppercase tracking-widest">
                     {config.yAxis.label}
                 </div>
@@ -71,7 +71,7 @@ export default function MatrixDiagram({
                     key={quad.id}
                     className={`
                         bg-zinc-900/50 hover:bg-zinc-800/80 transition-colors
-                        border-2 border-t-4 ${quad.color} border-zinc-800
+                        border-2 border-t-4 ${quad.color} border-zinc-900
                         rounded-xl p-4 flex flex-col relative overflow-hidden group
                     `}
                 >

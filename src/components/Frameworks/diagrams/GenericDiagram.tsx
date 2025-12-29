@@ -70,7 +70,7 @@ function GenericDiagram({
                             }}
                             style={{
                                 background: `linear-gradient(135deg, ${color}15 0%, ${color}05 100%)`,
-                                border: `2px solid ${color}30`,
+                                border: `1px solid ${color}15`,
                                 borderRadius: 'var(--radius-lg)',
                                 padding: 'var(--space-md)',
                                 cursor: interactive ? 'default' : 'default', // Interactive handled by children inputs
@@ -85,7 +85,7 @@ function GenericDiagram({
                             }}
                             onMouseOut={(e) => {
                                 if (interactive) {
-                                    e.currentTarget.style.borderColor = `${color}30`;
+                                    e.currentTarget.style.borderColor = `${color}15`;
                                     e.currentTarget.style.transform = 'translateY(0)';
                                 }
                             }}

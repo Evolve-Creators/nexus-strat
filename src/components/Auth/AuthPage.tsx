@@ -33,6 +33,25 @@ export default function AuthPage() {
         }
     };
 
+    const handleForgotPassword = async () => {
+        if (!email) {
+            setError('Please enter your email address to reset password.');
+            return;
+        }
+        setIsLoading(true);
+        try {
+            // NOTE: This usually requires a configured Verification/Recovery URL in Appwrite Console
+            // For now we assume typical setup or just show success message
+            await account.createRecovery(email, 'http://localhost:5173/reset-password');
+            alert('Password reset email sent! Check your inbox.');
+            setError('');
+        } catch (err: any) {
+            setError(err.message || 'Failed to send reset email.');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
     return (
         <div className="flex min-h-screen items-center justify-center bg-canvas p-4 text-primary transition-colors duration-300">
             <div className="w-full max-w-md space-y-8 rounded-2xl bg-card p-10 shadow-xl border border-border">
@@ -75,7 +94,18 @@ export default function AuthPage() {
                             />
                         </div>
                         <div>
-                            <label className="block text-sm font-medium text-muted">Password</label>
+                            <div className="flex items-center justify-between mb-1">
+                                <label className="block text-sm font-medium text-muted">Password</label>
+                                {isLogin && (
+                                    <button
+                                        type="button"
+                                        onClick={handleForgotPassword}
+                                        className="text-xs text-emerald-500 hover:text-emerald-400 font-medium transition-colors"
+                                    >
+                                        Forgot Password?
+                                    </button>
+                                )}
+                            </div>
                             <input
                                 type="password"
                                 required

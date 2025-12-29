@@ -36,7 +36,7 @@ const Marketing4PsDiagram: React.FC<Marketing4PsDiagramProps> = ({
     return (
         <div className="w-full h-full p-8 font-sans overflow-auto bg-zinc-950 text-zinc-300 flex flex-col items-center">
 
-            <h2 className="text-2xl font-light text-red-500 mb-12 tracking-[0.3em] uppercase opacity-80 border-b border-zinc-800 pb-4 w-full max-w-4xl text-center">
+            <h2 className="text-2xl font-light text-red-500 mb-12 tracking-[0.3em] uppercase opacity-80 border-b border-zinc-900 pb-4 w-full max-w-4xl text-center">
                 4P's of Marketing
             </h2>
 
@@ -56,14 +56,14 @@ const Marketing4PsDiagram: React.FC<Marketing4PsDiagramProps> = ({
                             </div>
 
                             {/* 2. TITLE (Dark Glass) */}
-                            <div className="w-[200px] h-[80px] bg-zinc-900/80 backdrop-blur-sm flex items-center pl-10 pr-6 relative z-10 clip-path-chevron-right border-y border-l border-zinc-800 group-hover:border-red-900/30 transition-colors">
+                            <div className="w-[200px] h-[80px] bg-zinc-900/80 backdrop-blur-sm flex items-center pl-10 pr-6 relative z-10 clip-path-chevron-right border-y border-l border-zinc-900 group-hover:border-red-900/30 transition-colors">
                                 <span className="text-zinc-300 font-bold text-xl tracking-tight group-hover:text-red-400 transition-colors">{title}</span>
                             </div>
 
                             {/* 3. CONTENT (Arrow Container - Sleek) */}
                             <div className="flex-1 h-[80px] ml-[-20px] relative z-0">
                                 {/* The Arrow Shape Wrapper */}
-                                <div className="absolute inset-0 bg-zinc-900/40 backdrop-blur-sm border-y border-r border-zinc-800 group-hover:border-red-500/20 flex items-center pl-14 pr-12 clip-path-arrow-right-long transition-all duration-300">
+                                <div className="absolute inset-0 bg-zinc-900/40 backdrop-blur-sm border-y border-r border-zinc-900 group-hover:border-red-500/20 flex items-center pl-14 pr-12 clip-path-arrow-right-long transition-all duration-300">
 
                                     <div className="w-full text-zinc-400 text-sm font-medium leading-tight group-hover:text-zinc-300 transition-colors">
                                         <InteractiveNode

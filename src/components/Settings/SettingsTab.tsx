@@ -8,9 +8,12 @@ export default function SettingsTab() {
     const { theme, toggleTheme } = useTheme();
 
     const handleLogout = async () => {
-        if (confirm('Are you sure you want to log out?')) {
-            await logout();
-        }
+        // Debugging for user
+        if (isGuest) alert('Stopping Guest Session...');
+        console.log('Logout clicked - forcing exit');
+        await logout();
+        localStorage.removeItem('nexus-strat-guest');
+        window.location.reload();
     };
 
     return (
@@ -83,6 +86,7 @@ export default function SettingsTab() {
                                 )}
                                 {/* This button was incomplete in the original snippet, assuming it's for logout */}
                                 <button
+                                    type="button"
                                     onClick={handleLogout}
                                     className="mt-4 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg font-medium transition"
                                 >

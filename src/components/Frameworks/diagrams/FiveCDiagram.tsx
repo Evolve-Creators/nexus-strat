@@ -31,9 +31,9 @@ const FiveCDiagram: React.FC<FiveCDiagramProps> = ({
         // We use the passed keys to look up content
 
         return (
-            <div className="flex flex-col h-full bg-zinc-900/50 backdrop-blur-sm border border-zinc-800 hover:border-cyan-500/30 transition-all duration-300 rounded-lg overflow-hidden group">
+            <div className="flex flex-col h-full bg-zinc-900/40 backdrop-blur-md border border-zinc-800 hover:border-cyan-500/30 transition-all duration-300 rounded-lg overflow-hidden group">
                 {/* Header */}
-                <div className="bg-zinc-800/80 px-4 py-3 border-b border-zinc-700/50 flex flex-col items-center justify-center relative">
+                <div className="bg-zinc-900/60 px-4 py-3 border-b border-zinc-800 flex flex-col items-center justify-center relative">
                     <div className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-cyan-500/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity"></div>
                     <h3 className="text-lg font-bold text-zinc-100 tracking-wide">{title}</h3>
                     {showDescriptions && subtitle && <span className="text-[10px] text-zinc-500 uppercase tracking-widest mt-1">{subtitle}</span>}
