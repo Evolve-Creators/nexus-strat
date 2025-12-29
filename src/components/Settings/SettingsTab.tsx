@@ -1,11 +1,9 @@
 
 import { useAuth } from '../../context/AuthContext';
-import { useTheme } from '../../context/ThemeContext';
-import { Moon, Sun, LogOut, User } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
 
 export default function SettingsTab() {
     const { user, isGuest, logout } = useAuth();
-    const { theme, toggleTheme } = useTheme();
 
     const handleLogout = async () => {
         // Debugging for user
@@ -25,38 +23,7 @@ export default function SettingsTab() {
                 </header>
 
                 <div className="space-y-8">
-                    {/* Appearance Section */}
-                    <section
-                        className="bg-zinc-900/20 backdrop-blur-xl border border-zinc-800 rounded-[24px] p-6 shadow-sm"
-                    >
-                        <h2 className="text-xl font-semibold mb-6 flex items-center gap-2">
-                            Appearance
-                        </h2>
 
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <h3 className="font-medium text-lg">Theme</h3>
-                                <p className="text-sm text-muted">Toggle between light and dark mode.</p>
-                            </div>
-
-                            <button
-                                onClick={toggleTheme}
-                                className={`relative inline-flex h-8 w-14 items-center rounded-full transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-accent focus:ring-offset-2 ${theme === 'dark' ? 'bg-emerald-500' : 'bg-zinc-300'
-                                    }`}
-                            >
-                                <span
-                                    className={`${theme === 'dark' ? 'translate-x-7' : 'translate-x-1'
-                                        } inline-block h-6 w-6 transform rounded-full bg-white transition duration-300 flex items-center justify-center`}
-                                >
-                                    {theme === 'dark' ? (
-                                        <Moon size={14} className="text-emerald-500" />
-                                    ) : (
-                                        <Sun size={14} className="text-yellow-500" />
-                                    )}
-                                </span>
-                            </button>
-                        </div>
-                    </section>
 
                     {/* Account Section */}
                     <section
