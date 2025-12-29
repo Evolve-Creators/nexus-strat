@@ -1,4 +1,4 @@
-import React from 'react';
+
 import InteractiveNode from '../InteractiveNode';
 import { Framework } from '../../../types';
 
@@ -13,7 +13,6 @@ interface CustomerJourneyDiagramProps {
 export default function CustomerJourneyDiagram({
     content,
     interactive = false,
-    showDescriptions = true,
     onContentChange
 }: CustomerJourneyDiagramProps) {
     const handleContentChange = (id: string, newContent: string[]) => {

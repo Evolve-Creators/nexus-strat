@@ -3,7 +3,6 @@ import { Plus, FolderOpen, Trash2, Clock, ArrowRight } from 'lucide-react';
 import AnalysisBoard from './AnalysisBoard';
 import { useAuth } from '../../context/AuthContext';
 import { getProjects, createProject, deleteProject } from '../../lib/appwrite';
-import { Models } from 'appwrite';
 
 interface Project {
     $id: string; // Appwrite ID
@@ -95,15 +94,6 @@ export default function AnalysisTab({ initialProjectId, initialFrameworkId }: An
                 // We also need to save the initial board state.
                 const newDoc = await createProject(user.$id, name);
 
-                const initialNode = {
-                    id: uuidv4(),
-                    type: 'frameworkNode',
-                    position: { x: 100, y: 100 },
-                    data: {
-                        framework: framework, // NOTE: Saving full framework object in cloud might be heavy/redundant but ensures consistency.
-                        content: {},
-                    }
-                };
                 // Update with initial data
                 // Need to import saveProjectData if not available?
                 // Actually createProject sets empty data. We can update it or just let the user add it?

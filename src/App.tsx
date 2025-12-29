@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import AppLayout from './components/Layout/AppLayout';
-import FrameworkLibrary from './components/Frameworks/FrameworkLibrary';
 import AnalysisTab from './components/Analysis/AnalysisTab';
 import SettingsTab from './components/Settings/SettingsTab';
 // import NotesPanel from './components/Notes/NotesPanel';

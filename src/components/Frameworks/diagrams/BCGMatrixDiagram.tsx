@@ -1,4 +1,4 @@
-import React from 'react';
+
 import InteractiveNode from '../InteractiveNode';
 import { Framework } from '../../../types';
 import { Star, HelpCircle, CircleDollarSign, AlertTriangle } from 'lucide-react';

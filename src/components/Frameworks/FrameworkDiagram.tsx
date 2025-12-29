@@ -4,7 +4,7 @@ import { Framework } from '../../types';
 import SWOTDiagram from './diagrams/SWOTDiagram';
 import PESTELDiagram from './diagrams/PESTELDiagram';
 import PortersDiagram from './diagrams/PortersDiagram';
-import MatrixDiagram from './diagrams/MatrixDiagram';
+
 import GenericDiagram from './diagrams/GenericDiagram';
 import ConcentricDiagram from './diagrams/ConcentricDiagram';
 import TreeDiagram from './diagrams/TreeDiagram';

@@ -121,7 +121,6 @@ export default function TreeDiagram({
     framework,
     content,
     interactive = false,
-    showDescriptions = true,
     onContentChange
 }: TreeDiagramProps) {
     return (

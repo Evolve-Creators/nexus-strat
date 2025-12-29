@@ -1,4 +1,4 @@
-import React from 'react';
+
 import { Plus, Sun, Moon } from 'lucide-react';
 import { useTheme } from '../../context/ThemeContext';
 
@@ -50,8 +50,8 @@ export default function Sidebar({ activeFramework, onSelect }: SidebarProps) {
                 <button
                     onClick={() => onSelect(null)}
                     className={`flex items-center gap-3 px-4 py-2.5 rounded-lg text-sm font-medium transition-all text-left ${!activeFramework
-                            ? 'bg-primary text-inverted shadow-sm'
-                            : 'text-muted hover:text-primary hover:bg-hover'
+                        ? 'bg-primary text-inverted shadow-sm'
+                        : 'text-muted hover:text-primary hover:bg-hover'
                         }`}
                 >
                     <span className="text-lg">📊</span>

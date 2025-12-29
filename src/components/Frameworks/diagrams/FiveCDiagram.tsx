@@ -12,7 +12,6 @@ interface FiveCDiagramProps {
 
 const FiveCDiagram: React.FC<FiveCDiagramProps> = ({
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    framework,
     content,
     interactive = false,
     showDescriptions = true,

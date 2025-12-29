@@ -1,7 +1,7 @@
-import React from 'react';
+
 import { useAuth } from '../../context/AuthContext';
 import { useTheme } from '../../context/ThemeContext';
-import { Moon, Sun, LogOut, User, Shield } from 'lucide-react';
+import { Moon, Sun, LogOut, User } from 'lucide-react';
 
 export default function SettingsTab() {
     const { user, isGuest, logout } = useAuth();

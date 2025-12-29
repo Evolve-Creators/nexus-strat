@@ -53,7 +53,7 @@ export default function MarketEntryDashboard({ content, interactive, showDescrip
                     {/* Level 2: Internal vs External */}
                     <div className="grid grid-cols-2 gap-20 w-full max-w-4xl relative">
                         {/* Connecting Lines would go here ideally with SVG, doing simple border hack for now */}
-                        <div className="absolute top-[-1rem] left-1/4 right-1/4 h-4 border-t border-l border-r border-zinc-950 rounded-t-lg"></div>
+                        <div className="absolute top-[-1rem] left-1/4 right-1/4 h-4 border-t border-l border-r border-zinc-700 rounded-t-lg"></div>
 
                         {/* Internal Branch */}
                         <div className="flex flex-col items-center gap-4">
@@ -76,7 +76,7 @@ export default function MarketEntryDashboard({ content, interactive, showDescrip
 
                             {/* External Splits into Industry vs Macro */}
                             <div className="grid grid-cols-2 gap-8 w-full mt-2 relative">
-                                <div className="absolute top-[-0.5rem] left-1/4 right-1/4 h-2 border-t border-l border-r border-zinc-950 rounded-t"></div>
+                                <div className="absolute top-[-0.5rem] left-1/4 right-1/4 h-2 border-t border-l border-r border-zinc-700 rounded-t"></div>
 
                                 {/* Industry Level */}
                                 <div className="flex flex-col gap-2">

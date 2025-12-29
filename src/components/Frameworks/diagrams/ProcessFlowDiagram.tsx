@@ -15,7 +15,6 @@ export default function ProcessFlowDiagram({
     framework,
     content,
     interactive = false,
-    showDescriptions = true,
     onContentChange
 }: ProcessFlowDiagramProps) {
     // Horizontal Chevron Process Flow

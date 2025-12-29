@@ -16,7 +16,6 @@ const Marketing4PsDiagram: React.FC<Marketing4PsDiagramProps> = ({
     framework,
     content,
     interactive = false,
-    showDescriptions = true,
     onContentChange
 }) => {
 

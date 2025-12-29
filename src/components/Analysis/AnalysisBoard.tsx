@@ -14,7 +14,6 @@ import {
     ReactFlowInstance,
     Panel,
     MiniMap,
-    NodeTypes,
     BackgroundVariant,
     ConnectionMode
 } from '@xyflow/react';
@@ -59,7 +58,7 @@ import { caseFrameworks } from '../../data/caseFrameworks';
 import { useAuth } from '../../context/AuthContext';
 const allFrameworks = [...generalFrameworks, ...caseFrameworks];
 
-const AnalysisBoardContent = ({ frameworks = allFrameworks, projectId, isGuest, onBack }: AnalysisBoardProps) => {
+const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps) => {
     const { user } = useAuth();
     const storageKey = `nexus-strat-project-${projectId}`;
     const reactFlowWrapper = useRef<HTMLDivElement>(null);

@@ -1,4 +1,4 @@
-import React from 'react';
+
 import InteractiveNode from '../InteractiveNode';
 import { Framework } from '../../../types';
 import { User, Monitor, Package, Settings } from 'lucide-react';
@@ -48,7 +48,7 @@ export default function FourMDiagram({
             <div className="flex flex-col gap-6 w-full max-w-5xl z-10">
                 {rows.map((row) => {
                     const section = framework.sections.find(s => s.id === row.id);
-                    const defaultPoints = section?.examples || []; // examples might be empty, use description if needed
+
                     const description = section?.description || '';
 
                     const Icon = row.icon;

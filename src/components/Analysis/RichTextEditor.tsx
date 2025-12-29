@@ -1,7 +1,6 @@
 import { useState, useRef, useEffect } from 'react';
 import {
-    Bold, Italic, Underline, List, ListOrdered, CheckSquare,
-    Type, Highlighter, Palette
+    Bold, Italic, Underline, List, ListOrdered, Highlighter
 } from 'lucide-react';
 
 interface RichTextEditorProps {

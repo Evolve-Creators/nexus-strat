@@ -13,7 +13,6 @@ export default function MatrixDiagram({
     framework,
     content,
     interactive = false,
-    showLabels = true,
     onContentChange
 }: MatrixDiagramProps) {
     const isAnsoff = framework.id.includes('ansoff');

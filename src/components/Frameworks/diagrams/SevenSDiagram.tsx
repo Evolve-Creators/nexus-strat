@@ -1,4 +1,4 @@
-import React from 'react';
+
 import InteractiveNode from '../InteractiveNode';
 import { Framework } from '../../../types';
 
@@ -11,7 +11,6 @@ interface SevenSDiagramProps {
 }
 
 export default function SevenSDiagram({
-    framework,
     content,
     interactive = false,
     showDescriptions = true,
@@ -25,7 +24,7 @@ export default function SevenSDiagram({
     // ... (rest of configuration omitted for brevity, keeping same logic)
 
     // Circle config
-    const circleRadius = 60; // Size of the circles
+
     const orbitRadius = 180; // Distance from center
     const center = { x: 400, y: 350 }; // Moved center down slightly to help with title overlap
 

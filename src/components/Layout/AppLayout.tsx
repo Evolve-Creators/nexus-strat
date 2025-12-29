@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Layout, BarChart2, Menu, X, StickyNote, History, Upload, Settings, BookOpen, FolderOpen } from 'lucide-react';
+import { Menu, X, StickyNote, History, Upload, Settings, BookOpen, FolderOpen } from 'lucide-react';
 
 interface AppLayoutProps {
     activeTab: 'frameworks' | 'analysis' | 'notes' | 'history' | 'upload' | 'settings';

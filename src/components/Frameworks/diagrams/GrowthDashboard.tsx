@@ -214,20 +214,20 @@ export default function GrowthDashboard({ content, interactive, showDescriptions
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div className="flex flex-col items-center w-72">
-                    <Node title="Non-Core Activities" type="category" />
-                    <VLine />
-                    <div className="flex flex-col gap-4 pt-4 border-t border-zinc-900 w-full items-center">
-                        <Node title="Lease/Rent Out" id="lease" />
-                        <Node title="Advertising Revenue" id="advertising" />
-                        <Node title="Value Added Services" id="vas" />
+
+                    <div className="flex flex-col items-center w-72">
+                        <Node title="Non-Core Activities" type="category" />
+                        <VLine />
+                        <div className="flex flex-col gap-4 pt-4 border-t border-zinc-900 w-full items-center">
+                            <Node title="Lease/Rent Out" id="lease" />
+                            <Node title="Advertising Revenue" id="advertising" />
+                            <Node title="Value Added Services" id="vas" />
+                        </div>
                     </div>
-                </div>
 
+                </div>
             </div>
         </div>
-        </div >
     );
 }
