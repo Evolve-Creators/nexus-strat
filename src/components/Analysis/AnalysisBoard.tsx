@@ -69,26 +69,70 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
     const [isLoading, setIsLoading] = useState(true);
     const [isSharing, setIsSharing] = useState(false);
 
+    const deleteNode = useCallback((id: string) => {
+        setNodes((nds) => nds.filter((n) => n.id !== id));
+        setEdges((eds) => eds.filter((e) => e.source !== id && e.target !== id));
+    }, [setNodes, setEdges]);
+
+    const updateNodeData = useCallback((id: string, dataUpdate: any) => {
+        setNodes((nds) => nds.map((node) => {
+            if (node.id === id) {
+                return { ...node, data: { ...node.data, ...dataUpdate } };
+            }
+            return node;
+        }));
+    }, [setNodes]);
+
+    // Helper to attach listeners to nodes (since functions aren't serialized)
+    const hydrateNodes = useCallback((nodesToHydrate: Node[]) => {
+        return nodesToHydrate.map(node => {
+            const data = { ...node.data };
+
+            // Re-attach delete handler to all custom nodes
+            if (['frameworkNode', 'stickyNote', 'imageNode'].includes(node.type || '')) {
+                data.onDelete = () => deleteNode(node.id);
+            }
+
+            // Re-attach specific handlers
+            if (node.type === 'frameworkNode') {
+                data.onUpdateContent = (sid: string, c: any) =>
+                    updateNodeData(node.id, { content: { ...(node.data.content as any), [sid]: c } });
+            } else if (node.type === 'stickyNote') {
+                data.onChange = (t: string) => updateNodeData(node.id, { text: t });
+                data.onColorChange = (c: string) => updateNodeData(node.id, { color: c });
+            }
+
+            return { ...node, data };
+        });
+    }, [deleteNode, updateNodeData]);
+
     // Initial Load
     useEffect(() => {
         const loadData = async () => {
             setIsLoading(true);
             try {
+                let loadedNodes: Node[] = [];
+                let loadedEdges: Edge[] = [];
+
                 if (isGuest) {
                     const stored = localStorage.getItem(`nexus-strat-project-${projectId}`);
                     if (stored) {
                         const flow = JSON.parse(stored);
-                        setNodes(flow.nodes || []);
-                        setEdges(flow.edges || []);
+                        loadedNodes = flow.nodes || [];
+                        loadedEdges = flow.edges || [];
                     }
                 } else {
                     const doc = await databases.getDocument(DB_ID, COLLECTION_PROJECTS, projectId);
                     if (doc.data) {
                         const flow = JSON.parse(doc.data);
-                        setNodes(flow.nodes || []);
-                        setEdges(flow.edges || []);
+                        loadedNodes = flow.nodes || [];
+                        loadedEdges = flow.edges || [];
                     }
                 }
+
+                // Hydrate nodes with handlers before setting state
+                setNodes(hydrateNodes(loadedNodes));
+                setEdges(loadedEdges);
             } catch (err) {
                 console.error("Failed to load project", err);
             } finally {
@@ -96,7 +140,7 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
             }
         };
         loadData();
-    }, [projectId, setNodes, setEdges, isGuest]);
+    }, [projectId, setNodes, setEdges, isGuest, hydrateNodes]);
 
     // Auto Save (Debounced)
     useEffect(() => {
@@ -215,38 +259,12 @@ const AnalysisBoardContent = ({ projectId, isGuest, onBack }: AnalysisBoardProps
         [reactFlowInstance, setNodes],
     );
 
-    const deleteNode = useCallback((id: string) => {
-        setNodes((nds) => nds.filter((n) => n.id !== id));
-        setEdges((eds) => eds.filter((e) => e.source !== id && e.target !== id));
-    }, [setNodes, setEdges]);
 
-    const updateNodeData = useCallback((id: string, dataUpdate: any) => {
-        setNodes((nds) => nds.map((node) => {
-            if (node.id === id) {
-                return { ...node, data: { ...node.data, ...dataUpdate } };
-            }
-            return node;
-        }));
-    }, [setNodes]);
 
     // ... skipping the hydrate useEffect hook from previous file? 
     // Need to include it! Default `useEffect` for hydration.
 
-    useEffect(() => {
-        setNodes((nds) => nds.map(node => {
-            // ... Hydration logic (simplified for brevity but critical)
-            if (node.type === 'frameworkNode' && !node.data.onDelete) {
-                return { ...node, data: { ...node.data, onDelete: () => deleteNode(node.id), onUpdateContent: (sid: string, c: any) => updateNodeData(node.id, { content: { ...(node.data.content as any), [sid]: c } }) } };
-            }
-            if (node.type === 'stickyNote' && !node.data.onDelete) {
-                return { ...node, data: { ...node.data, onDelete: () => deleteNode(node.id), onChange: (t: string) => updateNodeData(node.id, { text: t }), onColorChange: (c: string) => updateNodeData(node.id, { color: c }) } };
-            }
-            if (node.type === 'imageNode' && !node.data.onDelete) {
-                return { ...node, data: { ...node.data, onDelete: () => deleteNode(node.id) } };
-            }
-            return node;
-        }));
-    }, [deleteNode, updateNodeData]); // Clean hydration
+    // Hydration useEffect removed as it is now handled in loadData
 
 
 
